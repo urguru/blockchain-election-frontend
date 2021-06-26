@@ -44,5 +44,6 @@ jspm_packages
 api/.env
 .env
 
-# Contract Build Files
-ethereum/build
+
+#build
+build
