@@ -108,7 +108,7 @@ class AddCitizen extends React.Component {
                             onChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             onInputChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             renderInput={(params) => <TextField className={classes.textField} variant="outlined" {...params} label="Constituency ID" fullWidth />} />
-                        <Button type="submit" disabled={this.handleEmpty} variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty()} variant="contained" color="primary" className={classes.Button}>
                             Add Citizen
                         </Button>
                     </form>

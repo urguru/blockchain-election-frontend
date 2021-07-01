@@ -85,7 +85,7 @@ class AddConstituency extends React.Component {
                     <form noValidate onSubmit={this.handleSubmit}>
                         <TextField id='constituencyId'  variant="outlined"  name='constituencyId' type='text' label="Constituency ID" className={classes.textField} value={this.state.constituencyId} onChange={this.handleChange} fullWidth />
                         <TextField id='name' name='name'  variant="outlined"  type='text' label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange} fullWidth />
-                        <Button type="submit" disabled={this.handleEmpty} variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty()} variant="contained" color="primary" className={classes.Button}>
                             Add Constituency
                         </Button>
                     </form>

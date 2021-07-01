@@ -103,7 +103,7 @@ class AdminLogin extends Component {
                         <TextField id='email' name='email' variant="outlined" type='email' label="Email"
                             className={classes.textField} onChange={this.handleChange} fullWidth />
                         <TextField id='password' name='password' variant="outlined" type='password' label="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange} fullWidth />
-                        <Button type="submit" disabled={this.handleEmpty} variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty()} variant="contained" color="primary" className={classes.Button}>
                             Add Admin
                         </Button>
                     </form>
