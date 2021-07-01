@@ -4,8 +4,6 @@ const Web3 = require("web3");
 require("dotenv").config({ path: path.join(__dirname, "..", "..", ".env") });
 const HDWalletProvider = require("truffle-hdwallet-provider");
 
-const provider = new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/61b7f2721341453693448faf965b1597");
-
 //Deploying on localhost
 const web3 = new Web3("http://localhost:8545");
 

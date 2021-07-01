@@ -47,13 +47,15 @@ class AddCitizen extends React.Component {
             name: '',
             gender: '',
             constituencyId: '',
+            isOnDuty: 'false',
         }
     }
-    handleEmpty = () =>{
-        if(this.state.name.length==0 || this.state.gender.length==0 || this.state.voterId.length==0 || this.state.constituencyId.length==0 ){
-        return true;
+    handleEmpty = () => {
+        if (this.state.name.length == 0 || this.state.gender.length == 0 || this.state.voterId.length == 0
+            || this.state.constituencyId.length == 0 || this.state.isOnDuty.length == 0) {
+            return true;
         }
-        else{
+        else {
             return false;
         }
 
@@ -66,6 +68,7 @@ class AddCitizen extends React.Component {
             name: this.state.name,
             gender: this.state.gender,
             constituencyId: this.state.constituencyId,
+            isOnDuty: this.state.isOnDuty,
         }
         this.props.addCitizen(citizen, this.props);
     }
@@ -108,6 +111,13 @@ class AddCitizen extends React.Component {
                             onChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             onInputChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             renderInput={(params) => <TextField className={classes.textField} variant="outlined" {...params} label="Constituency ID" fullWidth />} />
+                        {/* IsOnDuty */}
+                        <Autocomplete id="isOnDuty"
+                            options={["true", "false"]} name="isOnDuty"
+                            getOptionLabel={(option) => option}
+                            onChange={(e, newValue) => this.setState({ isOnDuty: newValue })}
+                            onInputChange={(e, newValue) => this.setState({ isOnDuty: newValue })}
+                            renderInput={(params) => <TextField className={classes.textField} variant="outlined" {...params} label="IsOn Duty Official" fullWidth />} />
                         <Button type="submit" disabled={this.handleEmpty()} variant="contained" color="primary" className={classes.Button}>
                             Add Citizen
                         </Button>

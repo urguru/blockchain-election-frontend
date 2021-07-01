@@ -3,7 +3,6 @@ import citizenClient from "../clients/citizenClient";
 
 export const addCitizen = (citizen, props) => async (dispatch, getState) => {
     const ACCESS_TOKEN = getState().admin.token;
-    console.log(citizen);
     const mainAccount = getState().contract.mainAccount;
     const contract = getState().contract.contract;
     try {
@@ -66,6 +65,34 @@ export const castVote = (candidateVoterId, voterId, props) => async (dispatch, g
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Casting vote to the database" } })
             await citizenClient.castVote(ACCESS_TOKEN, candidateVoterId, voterId);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully casted vote to the blockchain network and the database" } })
+            props.history.push('/');
+        } catch (e) {
+            dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
+        }
+    } catch (e) {
+
+    }
+}
+
+export const castNotaVote = (voterId, props) => async (dispatch, getState) => {
+    const ACCESS_TOKEN = getState().admin.token;
+    const mainAccount = getState().contract.mainAccount;
+    const contract = getState().contract.contract;
+    try {
+        try {
+            dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Casting NOTA vote to the blockchain network" } })
+            const gas = await contract.methods.castNotaVote(voterId).estimateGas({ from: mainAccount });
+            await contract.methods.castNotaVote(voterId).send({ from: mainAccount, gas });
+            dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully casted NOTA vote to the blockchain network" } })
+        } catch (e) {
+            const errMessage = JSON.parse(e.message.substr(e.message.indexOf("{"))).originalError.message;
+            dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: errMessage } })
+            throw new Error();
+        }
+        try {
+            dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Casting NOTA vote to the database" } })
+            await citizenClient.castNotaVote(ACCESS_TOKEN, voterId);
+            dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully casted NOTA vote to the blockchain network and the database" } })
             props.history.push('/');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })

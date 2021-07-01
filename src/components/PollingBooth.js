@@ -15,7 +15,7 @@ class PollingBoothCard extends React.Component {
     }
 
     getTableItems = () => {
-        const {pollingBooth } = this.props;
+        const { pollingBooth } = this.props;
         const totalVoteCountFromDataBase = pollingBooth.maleVoteCount + pollingBooth.femaleVoteCount + pollingBooth.otherVoteCount;
         const tableList = [];
         tableList.push(["Name", pollingBooth.name]);
@@ -23,6 +23,7 @@ class PollingBoothCard extends React.Component {
         tableList.push(["Male Voter Turnout", pollingBooth.maleVoteCount]);
         tableList.push(["Female Voter Turnout", pollingBooth.femaleVoteCount]);
         tableList.push(["Others Voter Turnout", pollingBooth.otherVoteCount]);
+        tableList.push(["Nota Votes Casted", pollingBooth.notaVoteCount]);
         tableList.push(["Total Vote Count From Database", totalVoteCountFromDataBase]);
         return tableList;
     }

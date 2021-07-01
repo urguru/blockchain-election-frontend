@@ -31,10 +31,6 @@ const getConstituencyById = async (constituencyId) => {
     return response;
 }
 
-
-
-
-
 export default {
     addConstituency,
     getConstituencyById,
