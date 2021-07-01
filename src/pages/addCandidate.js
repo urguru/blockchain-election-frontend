@@ -47,6 +47,16 @@ class AddCandidate extends React.Component {
         }
     }
 
+    handleEmpty = () =>{
+        if(this.state.voterId.length==0 || this.state.contestingConstituencyId.length==0){
+        return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const candidate = {
@@ -81,7 +91,7 @@ class AddCandidate extends React.Component {
                             onChange={(e, newValue) => this.setState({ contestingConstituencyId: newValue })}
                             onInputChange={(e, newValue) => this.setState({ contestingConstituencyId: newValue })}
                             renderInput={(params) => <TextField className={classes.textField} variant="outlined" {...params} label="Contesting Constituency ID" fullWidth />} />
-                        <Button type="submit" variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty} variant="contained" color="primary" className={classes.Button}>
                             Add Candidate
                         </Button>
                     </form>

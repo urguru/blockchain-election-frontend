@@ -49,6 +49,15 @@ class AddCitizen extends React.Component {
             constituencyId: '',
         }
     }
+    handleEmpty = () =>{
+        if(this.state.name.length==0 || this.state.gender.length==0 || this.state.voterId.length==0 || this.state.constituencyId.length==0 ){
+        return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -60,6 +69,7 @@ class AddCitizen extends React.Component {
         }
         this.props.addCitizen(citizen, this.props);
     }
+
 
     handleChange = (event) => {
         if (event.target.name == "voterId") {
@@ -98,7 +108,7 @@ class AddCitizen extends React.Component {
                             onChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             onInputChange={(e, newValue) => this.setState({ constituencyId: newValue })}
                             renderInput={(params) => <TextField className={classes.textField} variant="outlined" {...params} label="Constituency ID" fullWidth />} />
-                        <Button type="submit" variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty} variant="contained" color="primary" className={classes.Button}>
                             Add Citizen
                         </Button>
                     </form>
