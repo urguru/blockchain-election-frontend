@@ -50,6 +50,15 @@ class AdminLogin extends Component {
             pollingBoothId: "",
         }
     }
+    handleEmpty = () =>{
+        if(this.state.name.length==0 || this.state.gender.length==0 || this.state.email.length==0 || this.state.password.length==0 || this.state.pollingBoothId.length==0){
+        return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 
     handleSubmit = (event) => {
         if (event.target.name == "pollingBoothId" || event.target.name == "email" || event.target.name == "gender") {
@@ -94,7 +103,7 @@ class AdminLogin extends Component {
                         <TextField id='email' name='email' variant="outlined" type='email' label="Email"
                             className={classes.textField} onChange={this.handleChange} fullWidth />
                         <TextField id='password' name='password' variant="outlined" type='password' label="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange} fullWidth />
-                        <Button type="submit" variant="contained" color="primary" className={classes.Button}>
+                        <Button type="submit" disabled={this.handleEmpty()} variant="contained" color="primary" className={classes.Button}>
                             Add Admin
                         </Button>
                     </form>
