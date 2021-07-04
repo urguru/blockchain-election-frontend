@@ -3,12 +3,12 @@ let config
 if (process.env.REACT_APP_ENV === 'production') {
     config = {
         apiURL: "https://blockchain-election-backend.azurewebsites.net/api",
-        contractAddress: "0x299a59DF0De3adfCD41d5DD089AAFF57410fDc9d",
+        contractAddress: "0x33932D1536b6749C9d42e0F8c7F8682aA5782b79",
     }
 } else {
     config = {
         apiURL: "http://localhost:3080/api",
-        contractAddress: "0x299a59DF0De3adfCD41d5DD089AAFF57410fDc9d",
+        contractAddress: "0x33932D1536b6749C9d42e0F8c7F8682aA5782b79",
     }
 }
 
