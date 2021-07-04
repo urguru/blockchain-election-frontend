@@ -32,7 +32,7 @@ const getCitizenByVoterId = async (ACCESS_TOKEN, voterId) => {
     return response;
 }
 
-const castVote = async (ACCESS_TOKEN, candidateVoterId,voterId) => {
+const castVote = async (ACCESS_TOKEN, candidateVoterId, voterId) => {
     const url = config.apiURL + `/v1/citizen/${voterId}/vote`;
     const options = {
         headers: {
@@ -50,8 +50,24 @@ const castVote = async (ACCESS_TOKEN, candidateVoterId,voterId) => {
     return response;
 }
 
+const castNotaVote = async (ACCESS_TOKEN, voterId) => {
+    const url = config.apiURL + `/v1/citizen/${voterId}/vote/nota`;
+    const options = {
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + ACCESS_TOKEN,
+        },
+        timeout: 10000,
+        responseType: 'json',
+        responseEncoding: 'utf8',
+    };
+    const response = await axios.post(url, null, options);
+    return response;
+}
+
 export default {
     addCitizen,
     getCitizenByVoterId,
     castVote,
+    castNotaVote,
 }

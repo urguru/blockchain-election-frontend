@@ -25,10 +25,13 @@ class ConstituencyCard extends React.Component {
         tableList.push(["Registered Male Voters", constituency.registeredMaleVoters]);
         tableList.push(["Registered Female Voters", constituency.registeredFemaleVoters]);
         tableList.push(["Registered Other Voters", constituency.registeredOtherVoters]);
+        tableList.push(["Registered on duty officials", constituency.registeredOnDutyOfficials]);
         if (electionStatus.text != constants.electionStatus.NOT_STARTED.text) {
             tableList.push(["Male Voter Turnout", constituency.maleVoteCount]);
             tableList.push(["Female Voter Turnout", constituency.femaleVoteCount]);
             tableList.push(["Others Voter Turnout", constituency.otherVoteCount]);
+            tableList.push(["OnDuty Officials Turnout", constituency.onDutyOfficialsVoteCount]);
+            tableList.push(["Total NOTA Votes Casted", contractConstituency[2]]);
             tableList.push(["Total Vote Count From Database", totalVoteCountFromDataBase]);
             tableList.push(["Total Vote Count From Contract", contractConstituency[1]]);
         }

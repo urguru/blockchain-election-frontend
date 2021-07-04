@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { getCitizenByVoterId, castVote } from '../actions/citizenActions';
+import { getCitizenByVoterId, castVote, castNotaVote } from '../actions/citizenActions';
 import CitizenTable from '../components/Citizen';
 import CandidateTable from '../components/Candidate';
 import constants from '../common/constants';
@@ -19,6 +19,12 @@ const styles = {
         justifyContent: "space-around",
         flexWrap: "wrap",
         alignItems: "center",
+    },
+    citizenTable: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
     },
     candidatesList: {
         display: "flex",
@@ -55,10 +61,6 @@ class CitizenDetailsPage extends React.Component {
         this.props.getCitizenByVoterId(voterId, this.props);
     }
 
-    castVote = () => {
-        this.props.castVote()
-    }
-
     getPresentableCandidate = (candidate) => {
         return (
             <Card className={this.props.classes.candidateBox}>
@@ -81,8 +83,16 @@ class CitizenDetailsPage extends React.Component {
     render() {
         const { classes, citizen } = this.props;
         return (citizen.isDataLoaded && <div className={classes.citizenDetails}>
-            <div>
+            <div className={classes.citizenTable}>
                 <CitizenTable citizen={citizen.citizen} />
+                {this.props.electionStatus.text == constants.electionStatus.STARTED.text &&
+                    !this.props.citizen.citizen.hasVoted &&
+                    <div>
+                        <Button size="large" variant="contained" color="primary"
+                            onClick={() => this.props.castNotaVote(this.props.citizen.citizen.voterId, this.props)}>
+                            Vote For NOTA
+                        </Button>
+                    </div>}
             </div>
             <div className={classes.candidatesList}>
                 {citizen.citizen.constituency.candidates.map(candidate => this.getPresentableCandidate(candidate))}
@@ -98,7 +108,8 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
     getCitizenByVoterId,
-    castVote
+    castVote,
+    castNotaVote
 }
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CitizenDetailsPage)));

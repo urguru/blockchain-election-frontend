@@ -6,6 +6,7 @@ contract Election {
     struct Constituency {
         string constituencyId;
         uint32 voteCount;
+        uint32 notaVoteCount;
     }
 
     struct Citizen {
@@ -64,7 +65,11 @@ contract Election {
         constituencyMapping[_constituencyId] = countOfConstituencies + 1;
         countOfConstituencies += 1;
         constituencies.push(
-            Constituency({constituencyId: _constituencyId, voteCount: 0})
+            Constituency({
+                constituencyId: _constituencyId,
+                voteCount: 0,
+                notaVoteCount: 0
+            })
         );
     }
 
@@ -163,6 +168,22 @@ contract Election {
         candidateVoteCount[candidateMappingValue - 1]++;
     }
 
+    function castNotaVote(string memory _voterId) public {
+        uint32 citizenMappingValue = citizenMapping[_voterId];
+        require(electionStatus == 1, "ER_ELECTION_NOT_IN_STARTED_STATE");
+        require(citizenMappingValue != 0, "ER_INVALID_VOTER_ID");
+        Citizen storage citizen = citizens[citizenMappingValue - 1];
+        require(citizen.hasVoted == false, "ER_ALREADY_VOTED");
+        require(whitelistedPollingBooths[msg.sender] == true, "ER_FORBIDDEN");
+        Constituency storage constituency = constituencies[
+            constituencyMapping[citizen.constituencyId] - 1
+        ];
+
+        citizen.hasVoted = true;
+        constituency.voteCount = constituency.voteCount + 1;
+        constituency.notaVoteCount = constituency.notaVoteCount + 1;
+    }
+
     function getConstituencyDetails(string memory _constituencyId)
         public
         view
@@ -220,8 +241,8 @@ contract Election {
 
         return candidateVoteCount[candidateMapping[_candidateVoterId] - 1];
     }
-    
-    function getAllVotes() public view returns (uint32[] memory){
+
+    function getAllVotes() public view returns (uint32[] memory) {
         require(electionStatus == 2, "ER_ELECTION_NOT_IN_COMPLETED_STATE");
         return candidateVoteCount;
     }
