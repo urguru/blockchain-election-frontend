@@ -11,5 +11,6 @@ if (process.env.REACT_APP_ENV === 'production') {
         contractAddress: "0x953513d3AD75027120493679eC6dD024bb98ee10",
     }
 }
-
+console.log(process.env.REACT_APP_ENV,process.env.CONTRACT_ADDRESS);
+console.log(config)
 export default config;
