@@ -3,7 +3,7 @@ let config
 if (process.env.REACT_APP_ENV === 'production') {
     config = {
         apiURL: "https://blockchain-election-backend.azurewebsites.net/api",
-        contractAddress: process.env.CONTRACT_ADDRESS,
+        contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS,
     }
 } else {
     config = {
@@ -11,6 +11,4 @@ if (process.env.REACT_APP_ENV === 'production') {
         contractAddress: "0x953513d3AD75027120493679eC6dD024bb98ee10",
     }
 }
-console.log(process.env.REACT_APP_ENV,process.env.CONTRACT_ADDRESS);
-console.log(config)
 export default config;
