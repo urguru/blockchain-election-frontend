@@ -7,8 +7,8 @@ if (process.env.REACT_APP_ENV === 'production') {
     }
 } else {
     config = {
-        apiURL: "http://localhost:3080/api",
-        contractAddress: "0x33932D1536b6749C9d42e0F8c7F8682aA5782b79",
+        apiURL: "https://blockchain-election-backend.azurewebsites.net/api",
+        contractAddress: "0x953513d3AD75027120493679eC6dD024bb98ee10",
     }
 }
 
