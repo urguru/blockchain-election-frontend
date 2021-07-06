@@ -27,6 +27,8 @@ import Error from './pages/errorPage';
 import HeaderComponent from './components/Header';
 import SidebarComponent from './components/Sidebar';
 import MainLoadingWindowComponent from './components/MainLoadingWindow';
+import Home from './pages/homePage';
+import Help from './pages/helpPage';
 
 const styles = {
 	mainStyle: {
@@ -58,7 +60,9 @@ class App extends React.Component {
 					<HeaderComponent />
 					<SidebarComponent />
 					<Switch>
-						<Route exact path="/" component={Dashboard} />
+						<Route exact path="/" component={Home} />
+						<Route exact path="/dashboard" component={Dashboard} />
+						<Route exact path="/help" component={Help} />
 						<Route exact path="/login" component={AdminLogin} />
 						<Route path="/constituency/:constituencyId" component={Constituency} />
 						<Route path="/candidate/:candidateVoterId" component={Candidate} />

@@ -7,7 +7,7 @@ export const adminLogin = (email, password, props) => async (dispatch, getState)
         const response = await adminClient.adminLogin(email, password);
         dispatch({ type: types.ADMIN_LOG_IN, payload: { isLoggedIn: true, token: response.data.token, admin: response.data.admin } });
         dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully logged into the application" } })
-        props.history.push('/');
+        props.history.push('/dashboard');
     } catch (e) {
         dispatch({ type: types.ADMIN_LOG_IN, payload: { isLoggedIn: false } })
         dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
@@ -19,7 +19,7 @@ export const adminLogout = (props) => (dispatch, getState) => {
     dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Logging out of the application" } })
     dispatch({ type: types.ADMIN_LOG_OUT })
     dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully logged out of the application" } })
-    props.history.push('/');
+    props.history.push('/dashboard');
 }
 
 export const addAdmin = (admin, props) => async (dispatch, getState) => {
@@ -28,7 +28,7 @@ export const addAdmin = (admin, props) => async (dispatch, getState) => {
         dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Adding admin to the database" } })
         await adminClient.addAdmin(ACCESS_TOKEN, admin);
         dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added admin to the database" } })
-        props.history.push('/');
+        props.history.push('/dashboard');
     } catch (e) {
         dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
     }

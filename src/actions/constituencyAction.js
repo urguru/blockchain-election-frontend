@@ -21,7 +21,7 @@ export const addConstituency = (constituency, props) => async (dispatch, getStat
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Adding constituency to database" } })
             await constituencyClient.addConstituency(ACCESS_TOKEN, constituency);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added constituency to blockchain network and database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }
@@ -47,7 +47,7 @@ export const getConstituencyById = (constituencyId, props) => async (dispatch, g
         }
         dispatch({ type: types.FAIL_LOADING_CONSTITUENCY_DATA })
         dispatch({ type: types.CONTRACT_DOESNOT_NEED_RELOAD })
-        props.history.push('/');
+        props.history.push('/dashboard');
     }
 }
 

@@ -9,15 +9,12 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import Computer from '@material-ui/icons/Computer';
 import LocationCity from '@material-ui/icons/LocationCity'
 import AccountBalance from '@material-ui/icons/AccountBalance';
+import HomeIcon from '@material-ui/icons/Home';
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import HowToVoteIcon from '@material-ui/icons/HowToVote';
-import SearchIcon from '@material-ui/icons/Search';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PageviewIcon from '@material-ui/icons/Pageview';
+import HelpIcon from '@material-ui/icons/Help';
 import UpdateIcon from '@material-ui/icons/Update';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -88,8 +85,10 @@ class Sidebar extends React.Component {
                 <List>
                     {
                         [
+                            //Home
+                            this.generateListItem("Home", HomeIcon, this.sideBarItemClickedEvent, '/'),
                             //Dashboard
-                            this.generateListItem("Dashboard", AppsIcon, this.sideBarItemClickedEvent, '/'),
+                            this.generateListItem("Dashboard", AppsIcon, this.sideBarItemClickedEvent, '/dashboard'),
                             //Login Icon
                             !admin.isLoggedIn && !isLoginPage
                             && this.generateListItem("Login", Computer, this.sideBarItemClickedEvent, '/login'),
@@ -119,6 +118,8 @@ class Sidebar extends React.Component {
                             && this.generateListItem(electionLinkText, UpdateIcon, this.sideBarItemClickedEvent, '/updateElectionStatus'),
                             // Logout Icon
                             admin.isLoggedIn && this.generateListItem("Logout", ExitToApp, this.adminLogoutFunction),
+                            //Help
+                            this.generateListItem("Help", HelpIcon, this.sideBarItemClickedEvent, '/help'),
                         ]
                     }
                 </List>

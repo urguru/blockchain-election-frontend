@@ -28,7 +28,7 @@ export const updateElectionStatus = (electionStatus, props) => async (dispatch, 
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Updating election state on the database" } })
             await electionClient.updateElectionStatus(ACCESS_TOKEN, electionStatus);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added candidate to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }

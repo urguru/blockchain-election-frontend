@@ -27,20 +27,33 @@ class ConstituencyCard extends React.Component {
         tableList.push(["Registered Other Voters", constituency.registeredOtherVoters]);
         tableList.push(["Registered on duty officials", constituency.registeredOnDutyOfficials]);
         if (electionStatus.text != constants.electionStatus.NOT_STARTED.text) {
-            tableList.push(["Male Voter Turnout", constituency.maleVoteCount]);
-            tableList.push(["Female Voter Turnout", constituency.femaleVoteCount]);
-            tableList.push(["Others Voter Turnout", constituency.otherVoteCount]);
-            tableList.push(["OnDuty Officials Turnout", constituency.onDutyOfficialsVoteCount]);
-            tableList.push(["Total NOTA Votes Casted", contractConstituency[2]]);
+            tableList.push(["Male Voter Voted", constituency.maleVoteCount]);
+            tableList.push(["Female Voter Voted", constituency.femaleVoteCount]);
+            tableList.push(["Others Voter Voted", constituency.otherVoteCount]);
             tableList.push(["Total Vote Count From Database", totalVoteCountFromDataBase]);
             tableList.push(["Total Vote Count From Contract", contractConstituency[1]]);
         }
         return tableList;
     }
 
+    getOtherDetailsTableItems = () => {
+        const { electionStatus, contractConstituency, constituency } = this.props;
+        const tableList = [];
+        if (electionStatus.text != constants.electionStatus.NOT_STARTED.text) {
+            tableList.push(["OnDuty Officials Voted", constituency.onDutyOfficialsVoteCount]);
+            tableList.push(["NOTA Votes Voted", contractConstituency[2]]);
+        }
+        return tableList;
+    }
+
     render() {
+        const { electionStatus, contractConstituency, constituency } = this.props;
         return (
-            <TableCard title="Constituency Details" lists={this.getTableItems()} />)
+            <div>
+                <TableCard title="Constituency Details" lists={this.getTableItems()} />
+                {electionStatus.text != constants.electionStatus.NOT_STARTED.text &&
+                    <TableCard title="Other Stats" lists={this.getOtherDetailsTableItems()} />}
+            </div>)
     }
 }
 

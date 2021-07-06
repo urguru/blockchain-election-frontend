@@ -20,7 +20,7 @@ export const addCandidate = (candidate, props) => async (dispatch, getState) => 
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Adding candidate to the database" } })
             await candidateClient.addCandidate(ACCESS_TOKEN, candidate);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added candidate to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }
@@ -40,7 +40,7 @@ export const getCandidateByVoterId = (candidateVoterId, props) => async (dispatc
     } catch (e) {
         dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         dispatch({ type: types.FAIL_LOADING_CANDIDATE_DATA })
-        props.history.push('/');
+        props.history.push('/dashboard');
     }
 }
 

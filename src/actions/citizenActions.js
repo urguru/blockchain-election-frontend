@@ -20,7 +20,7 @@ export const addCitizen = (citizen, props) => async (dispatch, getState) => {
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Adding citizen to the database" } })
             await citizenClient.addCitizen(ACCESS_TOKEN, citizen);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added citizen to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }
@@ -42,7 +42,7 @@ export const getCitizenByVoterId = (voterId, props) => async (dispatch, getState
         dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         dispatch({ type: types.FAIL_LOADING_CITIZEN_DATA })
         dispatch({ type: types.CONTRACT_DOESNOT_NEED_RELOAD })
-        props.history.push('/');
+        props.history.push('/dashboard');
     }
 }
 
@@ -65,7 +65,7 @@ export const castVote = (candidateVoterId, voterId, props) => async (dispatch, g
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Casting vote to the database" } })
             await citizenClient.castVote(ACCESS_TOKEN, candidateVoterId, voterId);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully casted vote to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }
@@ -93,7 +93,7 @@ export const castNotaVote = (voterId, props) => async (dispatch, getState) => {
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Casting NOTA vote to the database" } })
             await citizenClient.castNotaVote(ACCESS_TOKEN, voterId);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully casted NOTA vote to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }

@@ -26,7 +26,7 @@ export const addPollingBooth = (pollingBooth, props) => async (dispatch, getStat
             dispatch({ type: types.SET_LOADING_WINDOW_LOADING, payload: { mainLoadingWindowMessage: "Adding polling booth to the database" } })
             await pollingBoothClient.addPollingBooth(ACCESS_TOKEN, pollingBooth);
             dispatch({ type: types.SET_LOADING_WINDOW_SUCCESS, payload: { mainLoadingWindowMessage: "Successfully added polling booth to the blockchain network and the database" } })
-            props.history.push('/');
+            props.history.push('/dashboard');
         } catch (e) {
             dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         }
@@ -46,6 +46,6 @@ export const getPollingBoothById = (pollingBoothId, props) => async (dispatch, g
         dispatch({ type: types.SET_LOADING_WINDOW_FAILURE, payload: { mainLoadingWindowMessage: e.response.data.message } })
         dispatch({ type: types.FAIL_LOADING_POLLINGBOOTH_DATA })
         dispatch({ type: types.CONTRACT_DOESNOT_NEED_RELOAD })
-        props.history.push('/');
+        props.history.push('/dashboard');
     }
 }
